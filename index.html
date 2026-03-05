@@ -516,8 +516,10 @@
         }
 
         .portfolio-grid.horizontal {
-            grid-template-columns: 1fr;
-            max-width: 900px;
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    margin: 0 auto;
+    justify-items: center;
         }
 
         .portfolio-item {
@@ -530,11 +532,17 @@
         }
 
         .portfolio-item.vertical {
-            aspect-ratio: 9/16;
+            aspect-ratio: 16/9;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
         }
 
         .portfolio-item.horizontal {
             aspect-ratio: 16/9;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
         }
 
         .portfolio-item:hover {
@@ -544,20 +552,22 @@
         }
 
         .video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: var(--dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+             position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 20px;
         }
 
         .video-container video {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
         }
 
         /* КНОПКА PLAY ПО ЦЕНТРУ */
@@ -1123,4 +1133,5 @@
         });
     </script>
 </body>
+
 </html>
