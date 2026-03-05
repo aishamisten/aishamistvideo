@@ -572,22 +572,23 @@
 
         /* КНОПКА PLAY ПО ЦЕНТРУ */
         .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(139, 92, 246, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 20;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+              position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(139, 92, 246, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+    opacity: 1; /* Всегда видна по умолчанию */
         }
 
         .play-button:hover {
@@ -616,28 +617,24 @@
 
         /* ОПИСАНИЕ ВИДЕО */
         .portfolio-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(to top, rgba(15, 15, 26, 0.95), transparent);
-            transform: translateY(100%);
-            opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(15, 15, 26, 0.95), transparent);
+    transform: translateY(0); /* Всегда видно по умолчанию */
+    opacity: 1;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    z-index: 10;
+}
 
-        .portfolio-item:hover .portfolio-info {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .portfolio-item.video-playing .portfolio-info {
-            transform: translateY(100%) !important;
-            opacity: 0 !important;
-        }
+/* Скрываем описание только когда видео играет */
+.portfolio-item.video-playing .portfolio-info {
+    transform: translateY(100%);
+    opacity: 0;
+}
 
         .portfolio-info h3 {
             font-size: 1.1rem;
@@ -916,7 +913,7 @@
                 <!-- ВЕРТИКАЛЬНОЕ ВИДЕО 1 -->
                 <div class="portfolio-item vertical">
                     <div class="video-container">
-                        <video controls playsinline>
+                        <video playsinline>
                             <source src="videos/Final R3.mp4" type="video/mp4">
                         </video>
                         <div class="play-button">
@@ -935,7 +932,7 @@
                 <!-- ВЕРТИКАЛЬНОЕ ВИДЕО 2 -->
                 <div class="portfolio-item vertical">
                     <div class="video-container">
-                        <video controls playsinline>
+                        <video playsinline>
                             <source src="videos/zero-two alphaV3.mp4" type="video/mp4">
                         </video>
                         <div class="play-button">
@@ -954,7 +951,7 @@
                 <!-- ВЕРТИКАЛЬНОЕ ВИДЕО 3 -->
                 <div class="portfolio-item vertical">
                     <div class="video-container">
-                        <video controls playsinline>
+                        <video playsinline>
                             <source src="videos/R1 Pre-final2.0.mp4" type="video/mp4">
                         </video>
                         <div class="play-button">
@@ -985,7 +982,7 @@
                 <!-- ДЛИННОЕ ВИДЕО 1 -->
                 <div class="portfolio-item horizontal">
                     <div class="video-container">
-                        <video controls playsinline>
+                        <video playsinline>
                             <source src="videos/R4 motion.mp4" type="video/mp4">
                         </video>
                         <div class="play-button">
@@ -1049,42 +1046,32 @@
 
     <script>
         // Управление видео, кнопкой Play и описанием
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-            const video = item.querySelector('video');
-            const playButton = item.querySelector('.play-button');
-            
-            if (video && playButton) {
-                // Клик по кнопке Play — запускаем видео
-                playButton.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Предотвращаем всплытие
-                    video.play();
-                });
+       document.querySelectorAll('.portfolio-item').forEach(item => {
+    const video = item.querySelector('video');
+    const playButton = item.querySelector('.play-button');
+    
+    if (video && playButton) {
+        // Клик по кнопке Play — запускаем видео и скрываем элементы
+        playButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            video.play();
+            item.classList.add('video-playing'); // Сразу скрываем кнопку и описание
+        });
 
-                // Клик по видео (если на паузе) — тоже запускаем
-                video.addEventListener('click', () => {
-                    if (video.paused) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                });
-                
-                // При запуске видео — скрываем кнопку и описание
-                video.addEventListener('play', () => {
-                    item.classList.add('video-playing');
-                });
-                
-                // При паузе — показываем кнопку и описание
-                video.addEventListener('pause', () => {
-                    item.classList.remove('video-playing');
-                });
-                
-                // При завершении — показываем кнопку и описание
-                video.addEventListener('ended', () => {
-                    item.classList.remove('video-playing');
-                });
+        // Клик по видео — ставим на паузу и показываем элементы
+        video.addEventListener('click', () => {
+            if (!video.paused) {
+                video.pause();
+                item.classList.remove('video-playing'); // Показываем кнопку и описание
             }
         });
+        
+        // При завершении видео — показываем кнопку и описание
+        video.addEventListener('ended', () => {
+            item.classList.remove('video-playing');
+        });
+    }
+});
 
         // Smooth scroll для навигации
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1137,5 +1124,6 @@
 </body>
 
 </html>
+
 
 
