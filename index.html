@@ -532,9 +532,9 @@
         }
 
         .portfolio-item.vertical {
-            aspect-ratio: 16/9;
+            aspect-ratio: 9/16;
     width: 100%;
-    max-width: 800px;
+    max-width: 280px;
     margin: 0 auto;
         }
 
@@ -746,8 +746,10 @@
             }
 
             .portfolio-grid.vertical {
-                grid-template-columns: repeat(2, 1fr);
-            }
+                grid-template-columns: repeat(3, minmax(200px, 280px));
+    justify-content: center;
+    gap: 2rem;
+            }te-
 
             .portfolio-grid.horizontal {
                 grid-template-columns: 1fr;
@@ -1135,4 +1137,5 @@
 </body>
 
 </html>
+
 
