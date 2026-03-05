@@ -715,7 +715,7 @@
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end; /* Прижимаем к нижнему краю */
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -729,6 +729,7 @@
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.3s ease;
+    padding-top: 0.5rem; /* Отступ сверху */
 }
 
 .footer-email:hover {
@@ -745,8 +746,9 @@
     background-clip: text;
     flex: 1;
     text-align: center;
+    align-self: flex-start; /* Прижимаем логотип к верху */
+    padding-top: 0.5rem; /* Небольшой отступ сверху */
 }
-
 .footer-right {
     flex: 1;
     text-align: right;
@@ -754,6 +756,7 @@
 
 .footer-right p {
     margin: 0;
+    padding-top: 0.5rem; /* Отступ сверху */
 }
         /* Responsive */
         @media (max-width: 968px) {
@@ -1173,6 +1176,7 @@
 </body>
 
 </html>
+
 
 
 
