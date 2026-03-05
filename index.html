@@ -720,11 +720,10 @@
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* Прижимаем к нижнему краю */
+    align-items: center; /* Центрируем по вертикали */
     max-width: 1400px;
     margin: 0 auto;
 }
-
 .footer-left {
     flex: 1;
     text-align: left;
@@ -734,7 +733,8 @@
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.3s ease;
-    padding-top: 0.5rem; /* Отступ сверху */
+    display: inline-block;
+    padding-top: 1.5rem; /* Опускаем email ниже */
 }
 
 .footer-email:hover {
@@ -743,7 +743,7 @@
 
 .footer-logo {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-light), var(--accent));
     -webkit-background-clip: text;
@@ -752,7 +752,7 @@
     flex: 1;
     text-align: center;
     align-self: flex-start; /* Прижимаем логотип к верху */
-    padding-top: 0.5rem; /* Небольшой отступ сверху */
+    padding-top: 0; /* Без отступа */
 }
 .footer-right {
     flex: 1;
@@ -761,7 +761,7 @@
 
 .footer-right p {
     margin: 0;
-    padding-top: 0.5rem; /* Отступ сверху */
+    padding-top: 1.5rem; /* Опускаем текст прав ниже */
 }
         /* Responsive */
         @media (max-width: 968px) {
@@ -1162,6 +1162,7 @@
 </body>
 
 </html>
+
 
 
 
